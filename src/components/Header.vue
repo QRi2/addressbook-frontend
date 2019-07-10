@@ -2,42 +2,39 @@
   <div>
     <b-jumbotron bg-variant="dark" text-variant="white" link-variant="white">
       <template><h2>InMediasP</h2></template>
-      <b-link router-link to="/">
+      <label class="homeLink" @click="routeToHome()">
         Home
-        <br>
-        <br>
-      </b-link>
-      <div v-if="filterBar === 'true'">
-        <b-form-input v-model="text" placeholder="Filtersuche" v-on:keyup.enter="filtersearch"></b-form-input>
-      </div>
+      </label>
     </b-jumbotron>
   </div>
 </template>
 
 <script>
-import Home from '../views/Home'
 
 export default {
   name: 'Header',
   props: {
     filterBar: String
   },
-  data () {
-    return {
-      text: ''
-    }
-  },
   methods: {
-    filtersearch: function () {
-      Home.methods.filtersearch(this.text)
+    routeToHome () {
+      this.$router.push('/')
     }
   }
-}</script>
+}
+</script>
 
 <style scoped>
   .jumbotron {
     width: 1500px;
-    height: 240px;
+    height: 160px;
     margin-left: -20px;
+  }
+  .homeLink {
+    color: white;
+  }
+
+  .homeLink:hover{
+    cursor: pointer;
   }
 </style>

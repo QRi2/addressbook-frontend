@@ -4,9 +4,13 @@
     <div class="title">
       <h2>Alle Personendaten</h2><br>
     </div>
+    <div class="filter">
+      <b-form-input class="filter" v-model="filterText" placeholder="Filtersuche" v-on:keyup.enter="filtersearch"/>
+    </div><br>
     <div class="table">
       <b-table
         hover
+        :borderless="true"
         :items="items"
         :fields="fields">
         <template slot="id" slot-scope="data">
@@ -50,7 +54,7 @@ export default {
     return {
       fields: ['id', 'vorname', 'name', 'details', 'bearbeiten', 'löschen'],
       items: [],
-      id_s: []
+      filterText: ''
     }
   },
   mounted: function () {
@@ -93,8 +97,9 @@ export default {
           this.items = jsonData.valueOf()
         })
     },
-    filtersearch: function (text) {
-      fetch('http://localhost:8080/addressbook/address?' + text, {
+    filtersearch: function () {
+      console.log(this.filterText)
+      fetch('http://localhost:8080/addressbook/address?' + this.filterText, {
         method: 'get'
       })
         .then((response) => {
@@ -117,6 +122,10 @@ export default {
 
   .table {
     color: black;
-    width: 60%;
+    width: 70%;
+  }
+
+  .filter{
+    width: 800px;
   }
 </style>
