@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <table>
+    <table width="42%">
       <tr>
         <th>
           Vorname
@@ -92,7 +92,7 @@ export default {
       id: null
     }
   },
-  mounted: function () {
+  created: function () {
     this.id = this.personIndex
     if (this.personIndex !== null && this.personIndex !== '') {
       fetch('http://localhost:8080/addressbook/addresses/' + this.personIndex, {

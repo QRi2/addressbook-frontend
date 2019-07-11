@@ -1,23 +1,33 @@
 <template>
   <div class="complete">
-    <Header filterBar="false"/>
+    <Header/>
     <div>
-      <h2>Personendaten - Detail</h2><br>
+      <table width="47.5%">
+        <tr>
+          <th>
+            <h2>Personendaten - Detail</h2>
+          </th>
+          <th>
+            <div class="buttons">
+              <b-button variant="info" router-link to="/">
+                Home
+              </b-button>
+              <b-button variant="warning" @click="edit()">
+                Eintrag bearbeiten
+              </b-button>
+              <b-button variant="danger" @click="deleteThisItem()">
+                Eintrag löschen
+              </b-button>
+            </div>
+          </th>
+        </tr>
+      </table>
+      <br>
     </div>
     <div class="table">
       <PersonendatenTableDetail :personIndex="id"></PersonendatenTableDetail>
     </div>
-    <div class="buttons">
-      <b-button variant="info" router-link to="/">
-        Home
-      </b-button>
-      <b-button variant="warning" @click="edit()">
-        Eintrag bearbeiten
-      </b-button>
-      <b-button variant="danger" @click="deleteThisItem()">
-        Eintrag löschen
-      </b-button>
-    </div>
+
   </div>
 </template>
 
@@ -36,7 +46,7 @@ export default {
     }
   },
   methods: {
-    edit (id) {
+    edit () {
       this.$router.push('/personendatenBearbeiten/' + this.id)
     },
     deleteThisItem () {
@@ -54,3 +64,5 @@ export default {
   }
 }
 </script>
+<style>
+</style>

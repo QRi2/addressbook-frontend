@@ -13,9 +13,6 @@
 
 export default {
   name: 'Header',
-  props: {
-    filterBar: String
-  },
   methods: {
     routeToHome () {
       this.$router.push('/')
@@ -26,10 +23,11 @@ export default {
 
 <style scoped>
   .jumbotron {
-    width: 1500px;
+    width: 100%;
     height: 160px;
     margin-left: -20px;
   }
+
   .homeLink {
     color: white;
   }

@@ -2,10 +2,27 @@
   <div class="complete">
     <Header filterBar="true"/>
     <div class="title">
-      <h2>Alle Personendaten</h2><br>
+      <table width="47.5%">
+        <tr>
+          <th>
+            <h2>Alle Personendaten</h2>
+          </th>
+          <th align="right">
+            <div class="buttons">
+              <b-button variant="success" router-link :to="`/personendatenAnlegen`">
+                + Neu Anlegen
+              </b-button>
+              <b-button variant="danger" @click="showMsgBoxTwo">
+                Alles löschen
+              </b-button>
+            </div>
+        </th>
+        </tr>
+      </table>
+    <br>
     </div>
     <div class="filter">
-      <b-form-input class="filter" v-model="filterText" placeholder="Filtersuche" v-on:keyup.enter="filtersearch"/>
+      <b-form-input class="filter" v-model="filterText" placeholder="Filtersuche" v-on:keyup.enter="filtersearch" v-on:keyup="checkIfEmpty"/>
     </div><br>
     <div class="table">
       <b-table
@@ -16,30 +33,18 @@
         <template slot="id" slot-scope="data">
           {{ data.item.id }}
         </template>
-        <template slot="details" slot-scope="data">
-          <b-button variant="info" size="sm" @click="details(data.item.id)">
-            Details
+        <template slot=" " slot-scope="data">
+          <b-button  v-b-tooltip.hover title="Details" variant="info" size="sm" @click="details(data.item.id)">
+            <img src="@/assets/lupe.png" height="20" width="19"/>
           </b-button>
-        </template>
-        <template slot="bearbeiten" slot-scope="data">
-          <b-button variant="warning" size="sm" @click="edit(data.item.id)">
+          <b-button v-b-tooltip.hover title="Bearbeiten" variant="warning" size="sm" @click="edit(data.item.id)">
             <img src="@/assets/edit.png" height="20" width="19"/>
           </b-button>
-        </template>
-        <template slot="löschen" slot-scope="data">
-          <b-button variant="danger" size="sm" @click="deleteThisEntry(data.item.id)">
+          <b-button v-b-tooltip.hover title="Löschen" variant="danger" size="sm" @click="deleteThisEntry(data.item.id)">
             <img src="@/assets/trash.png" height="20" width="18"/>
           </b-button>
         </template>
       </b-table>
-    </div>
-    <div class="buttons">
-      <b-button variant="success" router-link :to="`/personendatenAnlegen`">
-        + Neu Anlegen
-      </b-button>
-      <b-button variant="danger" @click="deleteAllEntrys">
-        Alles löschen
-      </b-button>
     </div>
   </div>
 </template>
@@ -52,7 +57,7 @@ export default {
   components: { Header },
   data () {
     return {
-      fields: ['id', 'vorname', 'name', 'details', 'bearbeiten', 'löschen'],
+      fields: ['id', 'vorname', 'name', ' '],
       items: [],
       filterText: ''
     }
@@ -69,6 +74,25 @@ export default {
       })
   },
   methods: {
+    showMsgBoxTwo () {
+      this.boxTwo = ''
+      this.$bvModal.msgBoxConfirm('Wirklich alle Daten löschen?', {
+        title: 'Alle Daten löschen',
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'danger',
+        okTitle: 'JA',
+        cancelTitle: 'NEIN',
+        footerClass: 'p-2',
+        hideHeaderClose: true,
+        centered: true
+      })
+        .then(value => {
+          if (value) {
+            this.deleteAllEntrys()
+          }
+        })
+    },
     deleteAllEntrys () {
       fetch('http://localhost:8080/addressbook/addresses', {
         method: 'delete'
@@ -96,6 +120,11 @@ export default {
         .then((jsonData) => {
           this.items = jsonData.valueOf()
         })
+    },
+    checkIfEmpty () {
+      if (this.filterText === '') {
+        this.filtersearch()
+      }
     },
     filtersearch: function () {
       console.log(this.filterText)
@@ -126,6 +155,6 @@ export default {
   }
 
   .filter{
-    width: 800px;
+    width: 720px;
   }
 </style>

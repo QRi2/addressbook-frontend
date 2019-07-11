@@ -1,8 +1,8 @@
 <template>
-  <div class="table">
-    <table>
+  <div>
+    <table class="table">
       <tr>
-        <th>
+        <th class="firstColumn">
           Vorname
         </th>
         <th v-if="items.vorname">
@@ -35,7 +35,7 @@
         </th>
       </tr>
       <tr>
-        <th>
+        <th width="20%">
           Postleitzahl
         </th>
         <th v-if="items.adressdaten && items.adressdaten.postleitzahl">
@@ -91,14 +91,20 @@
         </th>
       </tr>
     </table>
-    <div class="buttons">
-      <b-button variant="success" @click="speichern()">
-        speichern
-      </b-button>
-      <b-button variant="danger" @click="abbrechen()">
-        abbrechen
-      </b-button>
-    </div>
+    <table class="buttonTable">
+      <tr>
+        <th>
+          <b-button block variant="success" @click="speichern()">
+            speichern
+          </b-button>
+        </th>
+        <th>
+          <b-button block variant="danger" @click="abbrechen()">
+            abbrechen
+          </b-button>
+        </th>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -245,6 +251,19 @@ export default {
 
 <style scoped>
   .form-control {
-    width: 400px;
+    width: 100%;
+  }
+
+  .firstColumn {
+    width: 20%;
+  }
+
+  .table {
+    width: 42.5%;
+  }
+
+  .buttonTable {
+    width: 42.5%;
+    margin-top: -15px;
   }
 </style>

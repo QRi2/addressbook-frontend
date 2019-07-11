@@ -1,6 +1,6 @@
 <template>
   <div class="complete">
-    <Header filterBar="false"/>
+    <Header/>
     <div>
       <h2>PersonenDaten - Bearbeiten</h2><br>
     </div>
