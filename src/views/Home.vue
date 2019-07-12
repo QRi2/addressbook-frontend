@@ -22,7 +22,7 @@
     <br>
     </div>
     <div class="filter">
-      <b-form-input class="filter" v-model="filterText" placeholder="Filtersuche" v-on:keyup.enter="filtersearch" v-on:keyup="checkIfEmpty"/>
+      <b-form-input class="filter" v-model="filterText" placeholder="Filtersuche" v-on:keyup.enter="filtersearch" v-on:keyup="checkIfFilterIsEmpty"/>
     </div><br>
     <div class="table">
       <b-table
@@ -62,7 +62,7 @@ export default {
       filterText: ''
     }
   },
-  mounted: function () {
+  created: function () {
     fetch('http://localhost:8080/addressbook/addresses', {
       method: 'get'
     })
@@ -121,7 +121,7 @@ export default {
           this.items = jsonData.valueOf()
         })
     },
-    checkIfEmpty () {
+    checkIfFilterIsEmpty () {
       if (this.filterText === '') {
         this.filtersearch()
       }
