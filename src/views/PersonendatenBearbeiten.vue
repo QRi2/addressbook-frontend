@@ -1,6 +1,5 @@
 <template>
   <div class="complete">
-    <Header/>
     <div>
       <h2>PersonenDaten - Bearbeiten</h2><br>
     </div>
@@ -11,11 +10,10 @@
 </template>
 
 <script>
-import Header from '../components/Header'
 import PersonendatenTableEdit from '../components/PersonendatenTableEdit'
 
 export default {
-  components: { Header, PersonendatenTableEdit },
+  components: { PersonendatenTableEdit },
   name: 'personendatenBearbeiten',
   props: {
     tableIndex: null

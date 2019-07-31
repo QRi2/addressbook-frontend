@@ -1,6 +1,5 @@
 <template>
   <div class="complete">
-    <Header filterBar="true"/>
     <div class="title">
       <table width="47.5%">
         <tr>
@@ -16,14 +15,16 @@
                 Alles löschen
               </b-button>
             </div>
-        </th>
+          </th>
         </tr>
       </table>
-    <br>
+      <br>
     </div>
     <div class="filter">
-      <b-form-input class="filter" v-model="filterText" placeholder="Filtersuche" v-on:keyup.enter="filtersearch" v-on:keyup="checkIfFilterIsEmpty"/>
-    </div><br>
+      <b-form-input class="filter" v-model="filterText" placeholder="Filtersuche" v-on:keyup.enter="filtersearch"
+                    v-on:keyup="checkIfFilterIsEmpty"/>
+    </div>
+    <br>
     <div class="table">
       <b-table
         hover
@@ -34,14 +35,14 @@
           {{ data.item.id }}
         </template>
         <template slot=" " slot-scope="data">
-          <b-button  v-b-tooltip.hover title="Details" variant="info" size="sm" @click="details(data.item.id)">
+          <b-button v-b-tooltip.hover title="Details" variant="info" size="sm" @click="details(data.item.id)">
             <img src="@/assets/lupe.png" height="20" width="19"/>
           </b-button>
           <b-button v-b-tooltip.hover title="Bearbeiten" variant="warning" size="sm" @click="edit(data.item.id)">
             <img src="@/assets/edit.png" height="20" width="19"/>
           </b-button>
           <b-button v-b-tooltip.hover title="Löschen" variant="danger" size="sm" @click="deleteThisEntry(data.item.id)">
-            <img src="@/assets/trash.png" height="20" width="18"/>
+            <img src="@/assets/trash.png" height="20" width="19"/>
           </b-button>
         </template>
       </b-table>
@@ -50,11 +51,9 @@
 </template>
 
 <script>
-import Header from '../components/Header'
 
 export default {
   name: 'home',
-  components: { Header },
   data () {
     return {
       fields: ['id', 'vorname', 'name', ' '],
@@ -154,7 +153,7 @@ export default {
     width: 70%;
   }
 
-  .filter{
+  .filter {
     width: 720px;
   }
 </style>

@@ -5,11 +5,8 @@
         <th class="firstColumn">
           Vorname
         </th>
-        <th v-if="items.vorname">
-          <b-form-input v-model="textVorname" :placeholder=items.vorname></b-form-input>
-        </th>
-        <th v-else>
-          <b-form-input v-model="textVorname" placeholder="Vorname"></b-form-input>
+        <th>
+          <b-form-input v-model="textVorname" :placeholder=getTextVorname></b-form-input>
         </th>
       </tr>
       <tr>
@@ -27,11 +24,8 @@
         <th>
           Straße
         </th>
-        <th v-if="items.adressdaten && items.adressdaten.strasse">
-          <b-form-input v-model="textStrasse" :placeholder=items.adressdaten.strasse></b-form-input>
-        </th>
-        <th v-else>
-          <b-form-input v-model="textStrasse" placeholder="Straße"></b-form-input>
+        <th >
+          <b-form-input v-model="textStrasse" :placeholder=getTextStrasse></b-form-input>
         </th>
       </tr>
       <tr>
@@ -126,8 +120,16 @@ export default {
       adressdaten: false
     }
   },
+  computed: {
+    getTextVorname: function () {
+      return this.items.vorname ? this.items.vorname : 'Vorname'
+    },
+    getTextStrasse: function () {
+      return this.items.adressdaten && this.items.adressdaten.strasse ? this.items.adressdaten.strasse : 'Straße'
+    }
+  },
   created: function () {
-    if (this.$route.params.id !== null) {
+    if (this.$route.params.id) {
       this.id = this.$route.params.id.toString()
       fetch('http://localhost:8080/addressbook/addresses/' + this.id, {
         method: 'get'

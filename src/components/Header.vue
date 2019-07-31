@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-jumbotron bg-variant="dark" text-variant="white" link-variant="white">
+    <b-jumbotron class="jumbotron" bg-variant="dark" text-variant="white" link-variant="white">
       <template><h2>InMediasP</h2></template>
       <label class="homeLink" @click="routeToHome()">
         Home

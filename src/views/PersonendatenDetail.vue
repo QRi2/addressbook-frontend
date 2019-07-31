@@ -1,6 +1,5 @@
 <template>
   <div class="complete">
-    <Header/>
     <div>
       <table width="47.5%">
         <tr>
@@ -24,19 +23,15 @@
       </table>
       <br>
     </div>
-    <div class="table">
-      <PersonendatenTableDetail :personIndex="id"></PersonendatenTableDetail>
-    </div>
-
+    <PersonendatenTableDetail :personIndex="id"></PersonendatenTableDetail>
   </div>
 </template>
 
 <script>
-import Header from '../components/Header'
 import PersonendatenTableDetail from '../components/PersonendatenTableDetail'
 
 export default {
-  components: { Header, PersonendatenTableDetail },
+  components: { PersonendatenTableDetail },
   created () {
     this.id = this.$route.params.id.toString()
   },
